@@ -7,7 +7,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
-
+import {QUOTES} from '../shared/quotes';
 
 const mapDispatchToProps = {
     fetchQuotes: () => (fetchQuotes())
@@ -20,6 +20,13 @@ const mapStateToProps = state => {
 };
 
 class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            quotes: QUOTES
+        };
+    }
+    
     componentDidMount() {
         this.props.fetchQuotes();
     }
@@ -28,9 +35,9 @@ class Main extends Component {
         const HomePage = () => {
             return (
                 <Home 
-                quote={this.props.quotes.quotes.filter(quote => quote)[0]}
-                quotesLoading={this.props.quotes.isLoading}
-                quotesErrMess={this.props.quotes.errMess}
+                //quote will need to eventually be filtered by selected date...
+                //but for now I'm selecting only first quote to demo that it shows up.
+                quote = {this.props.quotes.quotes.filter(quote => quote.date === "2001-01-01T08:00:00.000Z")[0]}
                 />
             )
         }

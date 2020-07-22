@@ -4,7 +4,7 @@ import { baseUrl } from '../shared/baseUrl';
 export const fetchQuotes = () => dispatch => {
     dispatch(quotesLoading());
 
-    return fetch(baseUrl + 'quotes')
+    return fetch(`${baseUrl}quotes`)
         .then(response => response.json())
         .then(quotes => dispatch(addQuotes(quotes)));
 };

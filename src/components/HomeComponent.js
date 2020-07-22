@@ -1,42 +1,58 @@
 import React, {Component} from 'react';
-import {Card, CardTitle, CardText, Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {connect} from "react-redux";
+import {Card, CardBody, CardTitle, CardText, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import DatePicker from 'react-date-picker';
+//import RenderQuote from './QuoteComponent';
+
+const mapStateToProps = state => ({
+    quotes: state.quotes.quotes,
+    loading: state.quotes.loading,
+    errMess: state.quotes.errMess
+
+})
+
 
 class CurrDate extends Component {
 //More info here: https://www.npmjs.com/package/react-calendar
 //Examples here: https://github.com/wojtekmaj/react-calendar/wiki/Recipes
     state = {
         date: new Date(),
-      }
-     
-      onChange = date => this.setState({ date })
-     
-      render() {
-        return (
-          <div>
-            <DatePicker
-              onChange={this.onChange}
-              value={this.state.date}
-            />
-          </div>
-        );
-      }
     }
-/* This is where I'll render the quote based on the date selected.
-    function RenderQuote({ quote }) {
-        return (
-            <Card>
-                <Link to={`/directory/${campsite.id}`}>
-                    <CardImg width="100%" src={baseUrl + campsite.image} alt={campsite.name} />
-                    <CardImgOverlay>
-                        <CardTitle>{campsite.name}</CardTitle>
-                    </CardImgOverlay>
-                </Link>
-            </Card>
+     
+    onChange = date => this.setState({ date })
     
-        )
+    render() {
+    return (
+        <div>
+        <DatePicker
+            onChange={this.onChange}
+            value={this.state.date}
+        />
+        </div>
+    );
     }
-*/
+}
+
+function RenderQuotes({quote}) {
+    console.log(quote);
+    if(quote) {
+        return(
+                <div className="col-md-8 m-1">
+                    <Card>
+                        <CardBody>
+                            <CardText>{quote.quote}</CardText>
+                            <CardText>{quote.author}</CardText>
+                            <CardText>{quote.date}</CardText>
+                        </CardBody>
+                    </Card>
+                </div>
+            )
+        }else{
+            return("This still isn't working...")
+        }
+}       
+     
+
 
 function Home (props) {
     return (
@@ -44,10 +60,7 @@ function Home (props) {
             <div className="row">
                 <div className="col-md-12">
                     <Card>
-                        <Card>
-                            <CardTitle><h4><i>In order to write about life first you must live it.</i></h4></CardTitle>
-                            <CardText>- Ernest Hemingway</CardText>
-                        </Card>
+                        <RenderQuotes quote={props.quote}/>
                         <hr />
                         <CurrDate />
                         <Form>
@@ -89,4 +102,4 @@ function Home (props) {
     );
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);
