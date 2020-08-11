@@ -64,6 +64,8 @@ _________________________
 # Next Steps
 _________________________
 
+*As of 8/11/2020*: I have combined the react app and the express server into a private repo where I will continue building. Please reach out if you are interested in this project.
+
 *As of 7/28/2020*: There will always be more to do. I have a list of features I'd like to add, and of course, there are still a few bugs to work out. You can check out the Issues tab, but here are some of the features I'm hoping to work in next:
    * User accounts with OAuth through Passport 
 	    * Then I could finally push it to production!
